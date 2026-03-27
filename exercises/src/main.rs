@@ -1,5 +1,5 @@
 mod temperature;
 
 fn main() {
-    temperature::test();
+    let _ = temperature::parse_f_to_c(451.0);
 }

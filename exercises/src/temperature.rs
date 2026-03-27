@@ -1,23 +1,36 @@
-use core::f64;
-use std::sync::atomic::{AtomicU32, Ordering};
+#[derive(Debug, Clone, Copy)]
+enum TempUnit {
+    Celsius,
+    Fahrenheit,
+    Kelvin,
+}
 
-const ABSOLUTE_ZERO_C: f64 = -273.15;
-static CONVERSION_COUNT: AtomicU32 = AtomicU32::new(0);
-
-fn celsius_to_fahrenheit(c: f64) -> f64{
-    if c < ABSOLUTE_ZERO_C {
-        return f64::NAN;
+fn parse_unit(s: &str) -> Result<TempUnit, String> {
+    match s {
+        "C" => Ok(TempUnit::Celsius),
+        "F" => Ok(TempUnit::Fahrenheit),
+        "K" => Ok(TempUnit::Kelvin),
+        _ => Err(format!("Unkown unit: {s}")),
     }
-    CONVERSION_COUNT.fetch_add(1, Ordering::Relaxed);
-    c * 9.0 / 5.0 + 32.0 //Conversion
 }
 
-pub fn test(){
-    let temp = "98.6";           // &str
-    let temp: f64 = temp.parse().unwrap(); // shadow as f64
-    let temp = celsius_to_fahrenheit(temp); // shadow as Fahrenheit
-    println!("Converting from: 98.6°C");
-    println!("Result: {temp:.1}°F");
-    println!("Conversions: {}", CONVERSION_COUNT.load(Ordering::Relaxed));
+fn convert(value: f64, from: TempUnit, to: TempUnit) -> f64 {
+    let celsius = match from {
+        TempUnit::Fahrenheit => (value - 32.0) * 5.0 / 9.0,
+        TempUnit::Kelvin => value - 273.15,
+        TempUnit::Celsius => value,
+    };
+    match to {
+        TempUnit::Fahrenheit => celsius * 9.0 / 5.0 + 32.0,
+        TempUnit::Kelvin => celsius + 273.15,
+        TempUnit::Celsius => celsius,
+    }
 }
 
+pub fn parse_f_to_c(input: f64) -> Result<(), String> {
+    let from = parse_unit("F")?;
+    let to = parse_unit("C")?;
+    let result = convert(input,from,to);
+    println!("{input}°F = {result:.1}°C");
+    Ok(())
+}
