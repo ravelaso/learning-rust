@@ -1,5 +1,5 @@
 [workspace]
-members = [
+members = ["exercises",
     "first_steps",
 ]
 resolver = "3"
