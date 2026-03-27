@@ -21,13 +21,12 @@ struct Args {
     threads: usize,
 }
 
-pub fn run(){
+pub fn run() {
     let args = Args::parse();
     if args.verbose {
         println!("Input:   {}", args.input);
         println!("Output:  {:?}", args.output);
         println!("Threads: {}", args.threads);
     }
-     // Use args.input, args.output, etc.
-    
+    // Use args.input, args.output, etc.
 }

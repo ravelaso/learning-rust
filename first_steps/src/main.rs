@@ -6,7 +6,7 @@
 // mod immutability;
 mod class;
 
-fn main(){
+fn main() {
     // console_input::run();
     // cli_arguments::run();
     // clap_example::run();

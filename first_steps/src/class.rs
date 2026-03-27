@@ -1,10 +1,11 @@
 #[derive(Debug)]
+
 pub struct Person {
     pub name: String,
     pub age: u32,
     hobbies: Vec<String>,
 }
-
+#[allow(dead_code)]
 impl Person {
     pub fn new(name: String, age: u32) -> Person {
         Person {
@@ -23,6 +24,24 @@ impl Person {
 
     pub fn hobbies(&self) -> &Vec<String> {
         &self.hobbies
+    }
+
+    /// &self - Immutable borrow (most common)
+    /// Use when you only need to read the data
+    pub fn get_name(&self) -> &str {
+        &self.name
+    }
+
+    /// &mut self - Mutable borrow
+    /// Use when you need to modify the data
+    pub fn set_name(&mut self, name: String) {
+        self.name = name;
+    }
+
+    /// self - Take ownership (less common)
+    /// Use when you want to consume the struct
+    pub fn consume(self) -> String {
+        self.name // Person is moved, no longer accessible
     }
 }
 
@@ -81,23 +100,23 @@ impl Calculator {
     }
 }
 
-pub fn calculator_test(){
+pub fn calculator_test() {
     // Associated functions called with ::
     let mut calc = Calculator::new();
     let _calc2 = Calculator::with_memory(42);
-    
+
     // Methods called with .
     let result = calc.add(5, 3);
     calc.store_in_memory(result);
-    
+
     println!("Memory: {}", calc.memory());
-    
+
     // Consuming method
-    let memory_value = calc.into_memory();  // calc is no longer usable
+    let memory_value = calc.into_memory(); // calc is no longer usable
     println!("Final memory: {}", memory_value);
 }
 
-pub fn test(){
+pub fn test() {
     person_test();
     calculator_test();
 }

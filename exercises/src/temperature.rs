@@ -30,7 +30,7 @@ fn convert(value: f64, from: TempUnit, to: TempUnit) -> f64 {
 pub fn parse_f_to_c(input: f64) -> Result<(), String> {
     let from = parse_unit("F")?;
     let to = parse_unit("C")?;
-    let result = convert(input,from,to);
+    let result = convert(input, from, to);
     println!("{input}°F = {result:.1}°C");
     Ok(())
 }
