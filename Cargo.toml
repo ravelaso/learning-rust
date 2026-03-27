@@ -2,3 +2,4 @@
 members = [
     "first_steps",
 ]
+resolver = "3"
