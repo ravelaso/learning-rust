@@ -115,8 +115,3 @@ pub fn calculator_test() {
     let memory_value = calc.into_memory(); // calc is no longer usable
     println!("Final memory: {}", memory_value);
 }
-
-pub fn test() {
-    person_test();
-    calculator_test();
-}

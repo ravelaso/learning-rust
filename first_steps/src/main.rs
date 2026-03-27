@@ -4,7 +4,7 @@
 // mod counter;
 // mod functions;
 // mod immutability;
-mod class;
+mod classes;
 
 fn main() {
     // console_input::run();
@@ -13,5 +13,5 @@ fn main() {
     // counter::run();
     // functions::run();
     // immutability::run();
-    class::test();
+    classes::test();
 }
