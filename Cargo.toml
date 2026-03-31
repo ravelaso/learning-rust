@@ -1,5 +1,5 @@
 [workspace]
-members = ["exercises",
+members = ["api_client","exercises",
     "first_steps",
 ]
 resolver = "3"

@@ -5,6 +5,7 @@
 // mod functions;
 // mod immutability;
 mod classes;
+mod ownership;
 
 fn main() {
     // console_input::run();

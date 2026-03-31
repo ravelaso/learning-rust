@@ -17,26 +17,41 @@ struct EmailBuilder {
 }
 #[allow(dead_code)]
 impl EmailBuilder {
-    fn new() -> Self { Self::default() }
+    fn new() -> Self {
+        Self::default()
+    }
 
     fn to(mut self, to: impl Into<String>) -> Self {
-        self.to = Some(to.into()); self
+        self.to = Some(to.into());
+        self
     }
     fn subject(mut self, subject: impl Into<String>) -> Self {
-        self.subject = Some(subject.into()); self
+        self.subject = Some(subject.into());
+        self
     }
     fn body(mut self, body: impl Into<String>) -> Self {
-        self.body = Some(body.into()); self
+        self.body = Some(body.into());
+        self
     }
     fn cc(mut self, addr: impl Into<String>) -> Self {
-        self.cc.push(addr.into()); self
+        self.cc.push(addr.into());
+        self
     }
     fn build(self) -> Result<Email, String> {
-        let to = self.to.filter(|s| !s.is_empty())
+        let to = self
+            .to
+            .filter(|s| !s.is_empty())
             .ok_or("'to' is required")?;
-        let subject = self.subject.filter(|s| !s.is_empty())
+        let subject = self
+            .subject
+            .filter(|s| !s.is_empty())
             .ok_or("'subject' is required")?;
-        Ok(Email { to, subject, body: self.body, cc: self.cc })
+        Ok(Email {
+            to,
+            subject,
+            body: self.body,
+            cc: self.cc,
+        })
     }
 }
 

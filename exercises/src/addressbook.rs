@@ -1,15 +1,17 @@
 #[derive(Debug, PartialEq)]
+#[allow(dead_code)]
 pub enum PhoneType {
     Mobile,
     Home,
     Work,
 }
 #[derive(Debug)]
+#[allow(dead_code)]
 pub struct Contact {
     name: String,
     phones: Vec<(PhoneType, String)>,
 }
-
+#[allow(dead_code)]
 impl Contact {
     pub fn new(name: impl Into<String>) -> Self {
         Contact {
@@ -29,7 +31,7 @@ impl Contact {
             .collect()
     }
 }
-
+#[allow(dead_code)]
 pub fn test() {
     let mut alice = Contact::new("Ravelo");
     alice.add_phone(PhoneType::Mobile, "+1-555-0100");
